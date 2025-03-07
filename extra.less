@@ -1,0 +1,368 @@
+/*** VARIABLES CODES ***/
+
+    // @color_accent     = accent color for text
+    // @color_foreground = color of text
+    // @color_background = color of main text area
+
+    // @BACKGROUND_URL: 'X' = url of background image
+
+    .reset() { // reset PFQ's style
+        border: 1px solid @color_foreground;
+        background: none;
+        color: @color_foreground;
+        box-shadow: none;
+    }
+/*** CUSTOM ***/
+    .fill {
+        // contains background image (2)
+        // scales template down as needed
+        background: url('@{BACKGROUND_URL}');
+        background-size: 100%;
+    }
+/** TEXT ** /
+    .text {
+        // specific formatting for body of text
+        // determines template width
+        // CONTENT
+    }
+    .mq2 & .text {
+        // mobile specific formatting for body of text
+        // CONTENT
+    }
+/** FIXER **/
+    .fixer {
+        // adjusts space between top/bottom images & the body of TEXT
+        // properties will typically be { margin-top or margin-bottom }
+        margin: 0;
+    }
+    .mq2 & .fixer {
+        // mobile specific formatting for fixer class
+        margin: 0;
+    }
+/** BOTTOM BOX **/
+    .bx img {
+        // contains bottom portion of template
+        // rarely changes
+        margin: 0;
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+    }
+/** TEMPLATE CREDIT **/
+    .credit {
+        // CONTENT
+    }
+    .mq2 & .credit{
+        // mobile specific formatting for credit class
+        margin: 0;
+    }
+
+/*** STYLE CODES ***/
+    .text {
+        margin: 0 auto;
+        color: @color_foreground;
+        font-size: 10pt;
+        font-family: 'Work Sans', Verdana, sans-serif;
+        line-height: 1.7;
+        position: relative;
+        z-index: 100000;
+        text-align: center;
+    }
+/*** TEXT BBCODES ***/
+    b {
+        font-weight: 600px;
+        color: @color_accent;
+    }
+    i, u, del {
+        color: @color_accent;
+    }
+    /* LINKS */
+    a {
+        opacity: 1;
+        position: relative;
+        color: @color_accent;
+        font-weight: 400;
+        text-decoration: none;
+    }
+    a:hover {
+        color: @color_accent;
+    }
+    a:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: -2.5px;
+        left: 0;
+        background-color: @color_accent;
+        visibility: hidden;
+        delay: 0s none !important;
+        position: true;
+        -webkit-transform: scale(0);
+           -moz-transform: scale(0);
+            -ms-transform: scale(0);
+             -o-transform: scale(0);
+                transform: scale(0);
+        -webkit-transition: all 0.3s ease-in-out 0s;
+           -moz-transition: all 0.3s ease-in-out 0s;
+            -ms-transition: all 0.3s ease-in-out 0s;
+             -o-transition: all 0.3s ease-in-out 0s;
+                transition: all 0.3s ease-in-out 0s;
+    }
+    a:hover:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+           -moz-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+             -o-transform: scaleX(1);
+                transform: scaleX(1);
+    }
+    /* TOOLTIPS */
+    .bbcode_tooltip {
+        border-bottom: 1px dotted @color_foreground;
+    }
+    .tooltip_content {
+        .reset;
+        background: @color_background;
+    }
+    /* LISTS */
+    ol, ul {
+        text-align: left;
+        margin-block-start: 1%;
+        margin-block-end: 0%;
+    }
+    /* HEADERS */
+    h1, h2, h3 {
+        font-weight: 600;
+        text-transform: none;
+        margin: 0;
+        margin-block-start: 0;
+        margin-block-end: -0.5em;
+    }
+/*** PANELS ***/
+    .panel {
+        .reset;
+        width: 98%;
+        margin: 0 auto;
+        /* TITLES */
+        >h3 {
+            margin: 4px;
+            >a {
+                color: @color_foreground;
+                display: inline-block;
+                &:before {
+                    display: none;
+                }
+            }
+            .reset;
+            border: none;
+            border-bottom: 1px solid @color_foreground;
+            border-radius: 0px;
+        }
+        >div {
+            color: @color_foreground;
+            border-left: none;
+            padding: 10px;
+            padding-top: 16px;
+        }
+    }
+    .panel.accordion {
+        >h3 {
+            border-bottom: none;
+            >a {
+                border-bottom: 1px solid @color_foreground;
+            }
+        }
+    }
+/*** TABBED INTERFACE ***/
+    .tabbed_interface.vertical {
+        .reset;
+        max-width: 98%;
+        margin: 0 auto;
+        border: none;
+        /* TAB CONTENT */
+        >.tab-active, .tab {
+            .reset;
+            background: @color_background;
+            border: 1px solid @color_foreground;
+            border-radius: 10px;
+            margin: 5px;
+            padding: 10px;
+            text-align: left;
+            margin-left: 29%;
+        }
+        /* TAB TITLES */
+        >ul {
+            background: none;
+            >li {
+                .reset;
+                flex: 1;
+                margin: 5px;
+                padding: 8px;
+                border: none;
+                border-radius: 10px;
+                border: 1px solid @color_foreground;
+                &:first-child {
+                    margin-top: -6px;
+                }
+            }
+            >li.tab-active { // active title w/ current label
+                font-weight: 600;
+                flex: 100%;
+                color: @color_foreground;
+                background: @color_background;
+                &:before {
+                    content: "Current Tab: ";
+                }
+            }
+        }
+    }
+    /* vertical layout will become horizontal if screen size is small */
+    .tabbed_interface.horizontal,
+    .mq2 & .tabbed_interface.vertical,
+    .mq25 & .tabbed_interface.vertical {
+        width: 98%;
+        margin: 0 auto;
+        .reset;
+        border: none;
+        /* TAB CONTENT */
+        >.tab-active, .tab {
+            .reset;
+            padding: 10px;
+            text-align: left;
+            border-radius: 10px;
+            margin: 5px;
+        }
+        /* TAB TITLES */
+        >ul {
+            .reset;
+            border: none;
+            display: flex;
+            >li { // inactive tab titles
+                .reset;
+                flex: 1;
+                margin: 5px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+                padding: 8px 5px;
+                border-radius: 10px;
+                border: 1px solid @color_foreground;
+            }
+            >li.tab-active { // active title w/ current label
+                text-align: left;
+                font-weight: 600;
+                order: 1;
+                flex: 100%;
+                color: @color_foreground;
+                &:before {
+                    content: "Current Tab: ";
+                }
+            }
+        }
+    }
+    .tabbed_interface.vertical>.tab-active, .tab {
+        margin-left: 40%;
+    }
+/*** TABLES ***/
+    .bbcode_table {
+        display: inline-block;
+        margin: 5px auto;
+        max-width: 98%;
+        overflow-x: auto;
+        white-space: nowrap;
+        border: none;
+        vertical-align: middle;
+        text-align: center;
+        border-collapse: separate;
+        color: @color_foreground;
+        td, th {
+            .reset;
+            white-space: pre;
+            margin: 5px;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        th {
+            color: @color_foreground;
+            border: 1px solid @color_foreground;
+            background: @color_background;
+        }
+    }
+/*** OTHER ***/
+    hr {
+        width: 80%;
+        margin: auto;
+        border: none;
+        border-top: 1px solid @accent;
+    }
+    /* PROGRESS */
+    .expbar {
+        max-width: 94%;
+        margin: 0 auto;
+        color: @color_background;
+        background-color: @color_background;
+        border-color: @color_foreground;
+        overflow: hide;
+        text-shadow:
+            1px 1px 0 @color_foreground,
+            -1px -1px 0 @color_foreground,
+            1px -1px 0 @color_foreground,
+            -1px 1px 0 @color_foreground,
+            1px 1px 0 @color_foreground;
+        &>div {
+            background-color: @color_foreground;
+            border-right: none;
+        }
+    }
+    /* PKMN PANEL */
+    .party>div {
+        .reset;
+        >.pkmn:before {
+            display: none;
+        }
+        >.pkmn>.helditem>.tooltip_content>.tooltip_item>.name {
+            border-color: @color_foreground;
+            >.image {
+            border-color: @color_foreground;
+            }
+        }
+    }
+    .pary>div>.action>.berrybuttons {
+       text-align:center;
+    }
+    /* SHOW PREFERRED BERRY */
+    .party>div>.action>.berrybuttons[data-up='sour']>[data-berry='aspear'],
+    .party>div>.action>.berrybuttons[data-up='spicy']>[data-berry='cheri'],
+    .party>div>.action>.berrybuttons[data-up='dry']>[data-berry='chesto'],
+    .party>div>.action>.berrybuttons[data-up='sweet']>[data-berry='pecha'],
+    .party>div>.action>.berrybuttons[data-up='bitter']>[data-berry='rawst'] {
+       width:100%;
+    }
+    .party>div>.action>.berrybuttons:not([data-up='sour'])>[data-berry='aspear'],
+    .party>div>.action>.berrybuttons:not([data-up='spicy'])>[data-berry='cheri'],
+    .party>div>.action>.berrybuttons:not([data-up='dry'])>[data-berry='chesto'],
+    .party>div>.action>.berrybuttons:not([data-up='sweet'])>[data-berry='pecha'],
+    .party>div>.action>.berrybuttons:not([data-up='bitter'])>[data-berry='rawst'] {
+       display:none;
+    }
+    .party>div>.action>.berrybuttons[data-up='any']>[data-berry] {
+     display:inline-block;
+    }
+/*** FONT IMPORT ***/
+    @font-face {
+      font-family: 'Work Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/worksans/v9/QGYsz_wNahGAdqQ43Rh_fKDptfpA4Q.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Work Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/worksans/v9/QGYsz_wNahGAdqQ43Rh_fKDptfpA4Q.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
